@@ -1,0 +1,22 @@
+{% extends 'jobapp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head_block %}
+  <title>Apply</title>
+{% endblock %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>Welcome Job Applicant!</h1><br>
+    {% if user.is_authenticated %}
+      <p><strong>Apply For A Job In Less Than 5 Minutes.</strong></p>
+      <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
+    {% else %}
+      <a href="{% url "jobapp:user_login" %}" role="button" class="btn btn-primary">Login</a>
+      <a href="{% url "jobapp:register" %}" role="button" class="btn btn-primary">Register</a>
+    {% endif %}
+  </div>
+{% endblock %}

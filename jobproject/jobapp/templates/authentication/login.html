@@ -1,0 +1,61 @@
+{% extends 'jobapp/base.html' %}
+{% block body_block %}
+  {% if request.path == "/login/jobseeker" %}
+  {% if not user.is_authenticated %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Login Here!</h1><br>
+      <a href="{% url "jobapp:register" %}" class="btn btn-primary" role="button">Sign Up</a><br>
+      <small style="color : gray">(If you haven't registered with us yet.)</small>
+    </div>
+        <form method="post" class = "form-group" action="{% url 'jobapp:user_login' %}">
+          {% csrf_token %}
+          <label for="username">Username : </label>
+          <input class = "form-control" type="text" name="username" placeholder="Enter Your Username"><br>
+
+          <label for="password">Password : </label>
+          <input class = "form-control" type="password" name="password" placeholder="Enter Your Password">
+          <br>
+          <input type="submit" name="" class = "btn btn-primary" value="Login">
+
+        </form>
+  </div>
+  {% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hey {{ user.first_name|title }}!</h1>
+      <h6>Apply For Job Here!</h6>
+    </div>
+  </div>
+  {% endif %}
+  {% elif request.path == "/login/manager" %}
+  {% if not user.is_authenticated %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Login Here Manager!</h1><br>
+      <a href="{% url "jobapp:manager_register" %}" class="btn btn-primary" role="button">Sign Up</a><br>
+      <small style="color : gray">(If you haven't registered with us yet.)</small>
+    </div>
+        <form method="post" class = "form-group" action="{% url 'jobapp:manager_login' %}">
+          {% csrf_token %}
+          <label for="username">Username:</label>
+          <input class = "form-control" type="text" name="username" placeholder="Enter Your Username"><br>
+
+          <label for="password">Password:</label>
+          <input class = "form-control" type="password" name="password" placeholder="Enter Your Password">
+          <br>
+          <input type="submit" name="" class = "btn btn-primary" value="Login">
+
+        </form>
+  </div>
+  {% else %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hey Mr. {{ user.first_name|title }}!</h1>
+      <h6>Review And Edit Job Descriptions!</h6>
+    </div>
+  </div>
+  {% endif %}
+  {% endif %}
+
+{% endblock %}

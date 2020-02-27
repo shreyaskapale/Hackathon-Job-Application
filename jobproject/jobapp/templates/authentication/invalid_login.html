@@ -1,0 +1,12 @@
+{% extends 'jobapp/base.html' %}
+{% block head_block %}
+  <title>Home</title>
+{% endblock %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>Invalid Login!</h1>
+    <h2>Sorry But We Didn't Find You In Our Job Portal Database. :-(</h2><br>
+    <a href="{% url "slotbookapp:register" %}" class="btn btn-primary" role="button">Sign Up</a><br>
+    <small style="color : gray">(Sign up right now and get onboard with our system.)</small>
+  </div>
+{% endblock %}

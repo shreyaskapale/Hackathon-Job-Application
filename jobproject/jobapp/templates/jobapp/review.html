@@ -1,0 +1,13 @@
+{% extends 'jobapp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head_block %}
+  <title>Review</title>
+{% endblock %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>Welcome Manager!</h1><br>
+    {% if user.is_authenticated %}
+    {% endif %}
+  </div>
+{% endblock %}

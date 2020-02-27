@@ -1,0 +1,22 @@
+{% extends 'jobapp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head_block %}
+  <title>Home</title>
+{% endblock %}
+{% block body_block %}
+  <div class="jumbotron">
+    <h1>Welcome Job Applicant!</h1><br>
+    {% if user.is_authenticated %}
+      <h4><strong>Job Seekers</strong></h4>
+      <ul>
+        <li><a href="{% url "jobapp:jobapply" %}">Apply For Job!</a></li>
+      </ul>
+      <h4><strong>System Managers</strong></h4>
+      <ul>
+        <li><a href="#">Review & Edit</a></li>
+        <li><a href="#">Manage Interviews</a></li>
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}

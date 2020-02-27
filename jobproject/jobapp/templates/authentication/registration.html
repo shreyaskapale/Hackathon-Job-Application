@@ -1,0 +1,39 @@
+{% extends 'jobapp/base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block head_block %}
+  <title>Register</title>
+{% endblock %}
+{% block body_block %}
+  {% if registered %}
+  <div class="jumbotron">
+    <h1>Hey {{ username|title }}! Thankyou For Onboarding With Us.</h1>
+    <h2>We pleasantly welcomes you to RDX Job Portal.</h2><br>
+    <a href="{% url "jobapp:user_login" %}" class="btn btn-primary" role="button">Login Now</a><br>
+  </div>
+  {% else %}
+  <div class="jumbotron">
+    <h1>Register Yourself With Us First!</h1><br>
+    {% if request.path == "/register/jobseeker" %}
+    <a href="{% url "jobapp:user_login" %}" class="btn btn-primary" role="button">Login</a><br>
+    {% elif request.path == "/register/manager" %}
+    <a href="{% url "jobapp:manager_login" %}" class="btn btn-primary" role="button">Login</a><br>
+    {% endif %}
+    <small style="color : gray">(If you have registered with us.)</small>
+  </div>
+  <br>
+  <form enctype="multipart/form-data" method="post">
+    {% if request.path == "/register/jobseeker" %}
+      {% csrf_token %}
+      {% bootstrap_form user_form %}
+      {% bootstrap_form profile_form %}
+    {% elif request.path == "/register/manager" %}
+      {% csrf_token %}
+      {% bootstrap_form manager_form %}
+      {% bootstrap_form profile_form %}
+    {% endif %}
+    <input type="submit" class="btn btn-primary" value="Register">
+  </form>
+  <br>
+  {% endif %}
+{% endblock %}
